@@ -12,4 +12,6 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/77f6f47c-2821-4f2c-b78f-77ef23693aa2" />
 
+Domain : CloudGettingStarted-env.eba-zzvtyfyg.ap-southeast-2.elasticbeanstalk.com 
+
 By Chayapol Dechsorn
