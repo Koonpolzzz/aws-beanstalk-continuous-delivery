@@ -15,14 +15,12 @@ const html = `
       --text: #18181b;
       --muted: #71717a;
       --border: #e4e4e7;
-      --dot: #10b981;
     }
     body.dark {
       --bg: #09090b;
       --text: #fafafa;
       --muted: #a1a1aa;
       --border: #27272a;
-      --dot: #34d399;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
@@ -61,22 +59,13 @@ const html = `
       text-align: center;
       padding: 2rem;
     }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .clock {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.85rem;
       color: var(--muted);
       margin-bottom: 1rem;
-      border: 1px solid var(--border);
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-    }
-    .dot {
-      width: 6px;
-      height: 6px;
-      background-color: var(--dot);
-      border-radius: 50%;
+      letter-spacing: 0.05em;
     }
     h1 {
       font-size: 2.5rem;
@@ -111,9 +100,7 @@ const html = `
 <body>
   <button id="toggle" aria-label="Toggle dark mode">Theme</button>
   <main>
-    <div class="status">
-      <span class="dot"></span> Available for work
-    </div>
+    <div id="clock" class="clock">BKK --:--:--</div>
     <h1>Hello World!</h1>
     <p>I'm Chayapol.</p>
     <nav>
@@ -125,7 +112,6 @@ const html = `
     const btn = document.getElementById('toggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     
-    // Check initial OS preference
     if (prefersDark.matches) {
       document.body.classList.add('dark');
     }
@@ -134,6 +120,20 @@ const html = `
       const isDark = document.body.classList.toggle('dark');
       btn.textContent = isDark ? 'Light' : 'Dark';
     };
+
+    // Live Bangkok clock
+    const clockEl = document.getElementById('clock');
+    function updateClock() {
+      const now = new Date().toLocaleTimeString('en-GB', {
+        timeZone: 'Asia/Bangkok',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      clockEl.textContent = 'BKK ' + now;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
